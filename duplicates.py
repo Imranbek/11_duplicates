@@ -22,8 +22,9 @@ def main():
     duplicate_list = []
     for file_name_size in file_name_size_stack:
         duplicate_count = file_name_size_stack.count(file_name_size)
-        if duplicate_count > 1:
-            duplicate_list.append((file_name_size[0], file_name_size[1], duplicate_count))
+        if duplicate_count == 1:
+            continue
+        duplicate_list.append((file_name_size[0], file_name_size[1], duplicate_count))
 
     final_duplicate_list = set(duplicate_list)
 
