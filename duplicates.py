@@ -21,17 +21,18 @@ def main():
     print('Finding duplicates...')
     duplicate_list = []
     for file_name_size in file_name_size_stack:
-        if file_name_size in duplicate_list:
-            continue  # Continue to next iteration.
         duplicate_count = file_name_size_stack.count(file_name_size)
         if duplicate_count > 1:
             duplicate_list.append((file_name_size[0], file_name_size[1], duplicate_count))
 
-    if len(duplicate_list):
-        raise Exception('Congrats! There is no duplicated files in this folder.')
+    final_duplicate_list = set(duplicate_list)
+
+    if not len(final_duplicate_list):
+        print('Congrats! There is no duplicated files in this folder.')
+        return None
 
     print('There is some duplicated files: ')
-    for file_name_size in duplicate_list:
+    for file_name_size in final_duplicate_list:
         print('File "{}" with size {} bytes: {} files'.format(
             file_name_size[0],
             file_name_size[1],
