@@ -21,12 +21,13 @@ def main():
     print('Finding duplicates...')
     duplicate_list = []
     for file_name_size in file_name_size_stack:
-        duplicate_count = file_name_size_stack.count(file_name_size)
-        if duplicate_count == 1:
-            continue
-        duplicate_list.append((file_name_size[0], file_name_size[1], duplicate_count))
+        file_name_size_count = get_tuple_duplicate_more_than_one(
+            file_name_size=file_name_size,
+            file_name_size_stack=file_name_size_stack)
+        duplicate_list.append(file_name_size_count)
 
     final_duplicate_list = set(duplicate_list)
+    final_duplicate_list.remove(None)
 
     if not len(final_duplicate_list):
         print('Congrats! There is no duplicated files in this folder.')
@@ -39,6 +40,14 @@ def main():
             file_name_size[1],
             file_name_size[2]))
         print('--------------')
+
+
+def get_tuple_duplicate_more_than_one(file_name_size: tuple,
+                                      file_name_size_stack: list):
+    duplicate_count = file_name_size_stack.count(file_name_size)
+    if duplicate_count > 1:
+        file_name_size_count = (file_name_size[0], file_name_size[1], duplicate_count)
+        return file_name_size_count
 
 
 def count_file_size(file_path: str):
