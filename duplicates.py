@@ -26,7 +26,7 @@ def main():
             if duplicate_count > 1:
                 duplicate_list.append((file_name_size[0],file_name_size[1], duplicate_count))
 
-    if len(duplicate_list) == 0:
+    if len(duplicate_list):
         raise Exception('Congrats! There is no duplicated files in this folder.')
 
     print('There is some duplicated files: ')
