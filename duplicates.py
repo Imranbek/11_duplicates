@@ -14,32 +14,36 @@ def main():
     list_of_file_paths = load_list_of_file_paths(file_path=file_path)
 
     print('Counting files sizes...')
-    file_data_stack = []
+    file_name_size_stack = []
     for path in list_of_file_paths:
-        file_name = path.split('/')[-1]
-        file_size = get_size_of_file(path)
+        file_name_size_stack.append(count_file_size(file_path=path))
 
-        file_data_stack.append((file_name, file_size))
-
-    print('Duplicate finding...')
+    print('Finding duplicates...')
     duplicate_list = []
-    for file_data in file_data_stack:
-        duplicate_count = file_data_stack.count(file_data)
-        if duplicate_count > 1:
-            f_name = file_data[0]
-            f_size = file_data[1]
-            if file_data not in duplicate_list:
-                duplicate_list.append(file_data)
-                if len(duplicate_list) == 1:
-                    print('There is some duplicated files: ')
-                print('File "{}" with size {} bytes: {} files'.format(
-                    f_name,
-                    f_size,
-                    duplicate_count))
-                print('--------------')
+    for file_name_size in file_name_size_stack:
+        if file_name_size not in duplicate_list:
+            duplicate_count = file_name_size_stack.count(file_name_size)
+            if duplicate_count > 1:
+                duplicate_list.append((file_name_size[0],file_name_size[1], duplicate_count))
 
     if len(duplicate_list) == 0:
-        print('Congrats! There is no duplicated files in this folder.')
+        raise Exception('Congrats! There is no duplicated files in this folder.')
+
+    print('There is some duplicated files: ')
+    for file_name_size in duplicate_list:
+        print('File "{}" with size {} bytes: {} files'.format(
+            file_name_size[0],
+            file_name_size[1],
+            file_name_size[2]))
+        print('--------------')
+
+
+def count_file_size(file_path: str):
+    file_name = file_path.split('/')[-1]
+    file_size = get_size_of_file(file_path)
+    name_size = (file_name, file_size)
+
+    return name_size
 
 
 def load_list_of_file_paths(file_path: str):
