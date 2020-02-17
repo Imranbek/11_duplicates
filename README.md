@@ -23,11 +23,11 @@ Collecting files from the folder...
 Counting files sizes...
 Duplicate finding...
 There is some duplicated files: 
-File "file1.txt" with size 5440 bytes: 3 files
+File "file1.txt" with size 5440 bytes.
+Paths:
+/Users/ExampleUser/file1.txt
+/Users/ExampleUser/exampleDirectory/file1.txt
 --------------
-File "file2.exe" with size 4553 bytes: 2 files
---------------
-File "file3.png" with size 64576923 bytes: 2 files
 ```
 
 # Project Goals

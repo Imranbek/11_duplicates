@@ -7,6 +7,9 @@ from pathlib import Path
 
 def main():
     directory = get_directory_from_arguments()
+    if not directory:
+        exit('Try again with right format "$ python duplicates.py {directory}"')
+
     file_name_size_paths = collect_files_information_from_directory(directory=directory)
 
     duplicates = [{name_size: paths} for name_size, paths in file_name_size_paths.items()
@@ -23,7 +26,7 @@ def get_directory_from_arguments():
     if len(sys.argv) == 2:
         path = sys.argv[1]
     else:
-        exit('Try again with right format "$ python duplicates.py {directory}"')
+        return None
 
     assert check_path_is_a_directory(path=path), 'Path is not a directory, ' \
                                                  'please, try again with directory path'
